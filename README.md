@@ -1,3 +1,4 @@
+
 # Reservify
 
 Reservify is a full-stack reservation platform for accommodations and restaurants.  
@@ -151,3 +152,6 @@ Pull requests are welcome. For major changes, open an issue first to discuss the
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+ 
