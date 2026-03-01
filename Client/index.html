@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="status" style="display: none;"></div> 
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      function loadSDK() {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://hanami-six.vercel.app/hanami-tracker.js';
+          script.async = true;
+          script.onload = () => {
+            try {
+              if (window.HanamiTracker) {
+                window.HanamiTracker.init({
+                  debug: true,
+                  cookieDomain: '.reservify.xyz', 
+                  cookieDays: 30,
+                  maxTrackers: 10,
+                  trackedParams: ['tracking_code', 'utm_source', 'utm_medium', 'click_id'],
+                });
+                document.getElementById('status').textContent = 'SDK loaded successfully!';
+                resolve();
+              } else {
+                document.getElementById('status').textContent = 'SDK loaded but HanamiTracker object not found!';
+                reject(new Error('SDK loaded but HanamiTracker object not found'));
+              }
+            } catch (e) {
+              document.getElementById('status').textContent = 'SDK initialization error!';
+              console.error('SDK initialization error:', e);
+              reject(e);
+            }
+          };
+          script.onerror = () => {
+            document.getElementById('status').textContent = 'Failed to load SDK!';
+            console.error('Failed to load SDK from https://hanami-six.vercel.app/hanami-tracker.js');
+            reject(new Error('Failed to load SDK'));
+          };
+          document.head.appendChild(script);
+        });
+      }
+    
+      // Call loadSDK immediately
+      loadSDK().catch(error => {
+        console.error('loadSDK failed:', error);
+      });
+    </script>
+  </body>
+</html>
