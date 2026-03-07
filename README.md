@@ -14,7 +14,7 @@ https://github.com/getchaviral/smart-reservation-system
 
 ## Demo
 
-Not deployed yet.
+https://smart-reservation-system-md2oehly0-getchavirals-projects.vercel.app/
 
 ## Video
 
